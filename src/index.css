@@ -11,3 +11,8 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.Dropdown {
+  max-height: 400px;
+  overflow-y: auto;
+}
