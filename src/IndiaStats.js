@@ -91,7 +91,7 @@ class IndiaStats extends React.Component {
         return (
             <ResponsiveContainer width={'99%'} height={700}>
                 <BarChart data={data}
-                    margin={{top: 20, right: 30, left: 20, bottom: 0}}
+                    margin={{top: 50, right: 30, left: 20, bottom: 0}}
                 >
                     <CartesianGrid strokeDasharray='3 3' />
                     <XAxis dataKey='state' interval='preserveStartEnd'/>
