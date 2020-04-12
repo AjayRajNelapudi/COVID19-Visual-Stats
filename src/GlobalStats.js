@@ -3,7 +3,7 @@ import {Container, Row, Col, Dropdown, Form} from 'react-bootstrap';
 import {AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer} from 'recharts';
 import Navigation from './Navigation';
 
-class Graph extends React.Component {
+class GlobalStats extends React.Component {
     constructor(props) {
         super(props);
 
@@ -139,4 +139,4 @@ class Graph extends React.Component {
     }
 }
 
-export default Graph;
+export default GlobalStats;

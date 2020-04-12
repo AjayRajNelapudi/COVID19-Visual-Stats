@@ -6,12 +6,12 @@ class Navigation extends React.Component {
         return (
             <div>
                 <Navbar bg="light" sticky="top" expand="lg">
-                    <Navbar.Brand href="/graphs">COVID19 Stats</Navbar.Brand>
+                    <Navbar.Brand href="/globalstats">COVID19 Stats</Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="mr-auto">
-                            <Nav.Link href="/graphs">Graph</Nav.Link>
-                            <Nav.Link href="/india">India</Nav.Link>
+                            <Nav.Link href="/globalstats">Global Stats</Nav.Link>
+                            <Nav.Link href="/indiastats">India Stats</Nav.Link>
                             {/* <Nav.Link href="#link"></Nav.Link>
                             <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>

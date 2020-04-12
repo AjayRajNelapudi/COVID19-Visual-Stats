@@ -3,7 +3,7 @@ import Navigation from './Navigation';
 import {Container, Row, Col, Dropdown, Form} from 'react-bootstrap';
 import {ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, LabelList} from 'recharts';
 
-class India extends React.Component {
+class IndiaStats extends React.Component {
     constructor(props) {
         super(props);
 
@@ -73,13 +73,10 @@ class India extends React.Component {
     }
 
     renderDeltaConfirmed(props) {
-        const {x, y, width, height, value} = props;
+        const {x, y, width, value} = props;
         const radius = 15;
         return (
             <g>
-                {/* <circle cx={x + width / 2} cy={y - radius} r={radius} fill='#8884d8' /> */}
-                {/* <ellipse cx={x + width / 2} cy={y - radius} rx={radius} ry={radius / 2} fill='#8884d8' /> */}
-                {/* <rect x={x} y={y} height={10} width={20} fill='#8884d8' /> */}
                 <text x={x + width / 2} y={y - radius} fill='#8884d8' textAnchor='middle' dominantBaseline='middle'>
                     +{value}
                 </text>
@@ -218,4 +215,4 @@ class India extends React.Component {
         );
     }   
 }
-export default India;
+export default IndiaStats;
