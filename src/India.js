@@ -73,7 +73,7 @@ class India extends React.Component {
     }
 
     renderStackedBarChart(data) {
-        if (data === undefined || data.length == 0) {
+        if (data === undefined || data.length === 0) {
             return <span></span>;
         }
         return (

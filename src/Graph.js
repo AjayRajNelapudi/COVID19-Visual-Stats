@@ -1,6 +1,6 @@
 import React from 'react';
-import {Container, Row, Col, Dropdown, Form, Button} from 'react-bootstrap';
-import {AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, LabelList, ResponsiveContainer} from 'recharts';
+import {Container, Row, Col, Dropdown, Form} from 'react-bootstrap';
+import {AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer} from 'recharts';
 import Navigation from './Navigation';
 
 class Graph extends React.Component {
