@@ -59,12 +59,16 @@ class Graph extends React.Component {
         return countries;
     }
 
-    getCountryTimeSeries() {
+    getStats() {
         let countryTimeSeries = this.state.timeSeries[this.state.country];
+        let currentStats = [];
         if (countryTimeSeries === undefined) {
-            return [];
+            countryTimeSeries = [];
+        } else {
+            countryTimeSeries = this.reverseDates(countryTimeSeries);
+            currentStats = countryTimeSeries[countryTimeSeries.length - 1];
         }
-        return countryTimeSeries;
+        return {countryTimeSeries, currentStats}
     }
 
     reverseDates(countryTimeSeries) {
@@ -79,14 +83,13 @@ class Graph extends React.Component {
 
     render() {
         let countries = this.renderCountries();
-        let countryTimeSeries = this.getCountryTimeSeries();
-        countryTimeSeries = this.reverseDates(countryTimeSeries);
+        let {countryTimeSeries, currentStats} = this.getStats();
         return (
             <div>
                 <Navigation />
                 <Container fluid>
                     <Row>
-                        <Col md={{span: 0, offset: 1}}>
+                        <Col>
                             <Dropdown>
                                 <Dropdown.Toggle variant="dark" id="dropdown-basic">
                                     {this.state.country}
@@ -97,6 +100,15 @@ class Graph extends React.Component {
                                     {countries}
                                 </Dropdown.Menu>
                             </Dropdown>
+                        </Col>
+                        <Col>
+                            <h4 style={{color: '#8884d8'}}>Confirmed: {currentStats.confirmed}</h4>
+                        </Col>
+                        <Col>
+                            <h4 style={{color: '#cc0000'}}>Deaths: {currentStats.deaths}</h4>
+                        </Col>
+                        <Col>
+                            <h4 style={{color: '#82ca9d'}}>Recovered: {currentStats.recovered}</h4>
                         </Col>
                     </Row>
                     <Row>
@@ -110,9 +122,8 @@ class Graph extends React.Component {
                                     <YAxis />
                                     <Tooltip/>
                                     <Area type='monotone' dataKey='confirmed' stroke='#8884d8' fill='#8884d8' />
-                                    <Area type='monotone' dataKey='deaths' stroke='#8884d8' fill='#cc0000' />
                                     <Area type='monotone' dataKey='recovered' stroke='#8884d8' fill='#82ca9d' />
-                                    <LabelList content={['hello', 'world']} />
+                                    <Area type='monotone' dataKey='deaths' stroke='#8884d8' fill='#cc0000' />
                                 </AreaChart>
                             </ResponsiveContainer>
                         </Col>

@@ -11,7 +11,7 @@ class Navigation extends React.Component {
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="mr-auto">
                             <Nav.Link href="/graphs">Graphs</Nav.Link>
-                            <Nav.Link href="/India">India</Nav.Link>
+                            {/* <Nav.Link href="/India">India</Nav.Link> */}
                             {/* <Nav.Link href="#link"></Nav.Link>
                             <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
