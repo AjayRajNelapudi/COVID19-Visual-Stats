@@ -199,7 +199,7 @@ class IndiaStats extends React.Component {
                                 Recovered: {currentStats.recovered}
                                 {
                                     currentStats.deltarecovered !== 'N/A' ?
-                                        ', +' + currentStats.recovered + ' today' :
+                                        ', +' + currentStats.deltarecovered + ' today' :
                                         <span></span>
                                 }
                             </h4>
