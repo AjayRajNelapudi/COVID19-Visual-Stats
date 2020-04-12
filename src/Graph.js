@@ -55,7 +55,6 @@ class Graph extends React.Component {
                 </Dropdown.Item>    
             );
         })
-
         return countries;
     }
 
@@ -81,6 +80,24 @@ class Graph extends React.Component {
         return modifiedCountryTimeSeries;
     }
 
+    renderAreaChart(countryTimeSeries) {
+        return (
+            <ResponsiveContainer width={'99%'} height={700}>
+                <AreaChart width={1400} height={700} data={countryTimeSeries}
+                    margin={{top: 10, right: 30, left: 30, bottom: 0}}
+                >
+                    <CartesianGrid strokeDasharray="3 3"/>
+                    <XAxis dataKey="date"/>
+                    <YAxis />
+                    <Tooltip/>
+                    <Area type='monotone' dataKey='confirmed' stroke='#8884d8' fill='#8884d8' />
+                    <Area type='monotone' dataKey='recovered' stroke='#8884d8' fill='#82ca9d' />
+                    <Area type='monotone' dataKey='deaths' stroke='#8884d8' fill='#cc0000' />
+                </AreaChart>
+            </ResponsiveContainer>
+        );
+    }
+
     render() {
         let countries = this.renderCountries();
         let {countryTimeSeries, currentStats} = this.getStats();
@@ -96,36 +113,24 @@ class Graph extends React.Component {
                                 </Dropdown.Toggle>
 
                                 <Dropdown.Menu>
-                                    <Form.Control type="text" placeholder={this.state.searchBarText} onChange={(e) => this.updateSearchBarText(e.target.value)} /> 
+                                    <Form.Control type="text" placeholder="Search" onChange={(e) => this.updateSearchBarText(e.target.value)} /> 
                                     {countries}
                                 </Dropdown.Menu>
                             </Dropdown>
                         </Col>
                         <Col>
-                            <h4 style={{color: '#8884d8'}}>Confirmed: {currentStats.confirmed}</h4>
+                            <h4 style={{color: '#8884d8'}}>Confirmed: {currentStats === undefined ? 0 : currentStats.confirmed}</h4>
                         </Col>
                         <Col>
-                            <h4 style={{color: '#cc0000'}}>Deaths: {currentStats.deaths}</h4>
+                            <h4 style={{color: '#cc0000'}}>Deaths: {currentStats === undefined ? 0 : currentStats.deaths}</h4>
                         </Col>
                         <Col>
-                            <h4 style={{color: '#82ca9d'}}>Recovered: {currentStats.recovered}</h4>
+                            <h4 style={{color: '#82ca9d'}}>Recovered: {currentStats === undefined ? 0 : currentStats.recovered}</h4>
                         </Col>
                     </Row>
                     <Row>
                         <Col>
-                            <ResponsiveContainer width={'99%'} height={700}>
-                                <AreaChart width={1400} height={700} data={countryTimeSeries}
-                                    margin={{top: 10, right: 30, left: 30, bottom: 0}}
-                                >
-                                    <CartesianGrid strokeDasharray="3 3"/>
-                                    <XAxis dataKey="date"/>
-                                    <YAxis />
-                                    <Tooltip/>
-                                    <Area type='monotone' dataKey='confirmed' stroke='#8884d8' fill='#8884d8' />
-                                    <Area type='monotone' dataKey='recovered' stroke='#8884d8' fill='#82ca9d' />
-                                    <Area type='monotone' dataKey='deaths' stroke='#8884d8' fill='#cc0000' />
-                                </AreaChart>
-                            </ResponsiveContainer>
+                            {this.renderAreaChart(countryTimeSeries)}
                         </Col>
                     </Row>
                 </Container>

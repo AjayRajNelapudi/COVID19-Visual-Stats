@@ -5,7 +5,6 @@ import {BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
 import Graph from './Graph';
 import India from './India';
 
-
 class App extends React.Component {
 	render() {
 		return (
@@ -15,7 +14,7 @@ class App extends React.Component {
 						<Route path="/graphs">
 							<Graph />
 						</Route>
-						<Route path="/India">
+						<Route path="/india">
 							<India />
 						</Route>
 						<Route path="/">

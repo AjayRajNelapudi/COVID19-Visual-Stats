@@ -1,7 +1,7 @@
 import React from 'react';
 import {Navbar, NavDropdown, Nav, Form, FormControl, Button} from 'react-bootstrap';
 
-class Navigation extends React.Component {
+class Navigation extends React.Component {    
     render() {
         return (
             <div>
@@ -10,8 +10,8 @@ class Navigation extends React.Component {
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="mr-auto">
-                            <Nav.Link href="/graphs">Graphs</Nav.Link>
-                            {/* <Nav.Link href="/India">India</Nav.Link> */}
+                            <Nav.Link href="/graphs">Graph</Nav.Link>
+                            <Nav.Link href="/india">India</Nav.Link>
                             {/* <Nav.Link href="#link"></Nav.Link>
                             <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
