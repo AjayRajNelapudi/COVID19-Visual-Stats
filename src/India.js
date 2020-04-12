@@ -1,7 +1,7 @@
 import React from 'react';
 import Navigation from './Navigation';
 import {Container, Row, Col, Dropdown, Form} from 'react-bootstrap';
-import {ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend} from 'recharts';
+import {ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, LabelList} from 'recharts';
 
 class India extends React.Component {
     constructor(props) {
@@ -72,6 +72,21 @@ class India extends React.Component {
         return states;
     }
 
+    renderDeltaConfirmed(props) {
+        const {x, y, width, height, value} = props;
+        const radius = 15;
+        return (
+            <g>
+                {/* <circle cx={x + width / 2} cy={y - radius} r={radius} fill='#8884d8' /> */}
+                {/* <ellipse cx={x + width / 2} cy={y - radius} rx={radius} ry={radius / 2} fill='#8884d8' /> */}
+                {/* <rect x={x} y={y} height={10} width={20} fill='#8884d8' /> */}
+                <text x={x + width / 2} y={y - radius} fill='#8884d8' textAnchor='middle' dominantBaseline='middle'>
+                    +{value}
+                </text>
+            </g>
+        );
+    }
+
     renderStackedBarChart(data) {
         if (data === undefined || data.length === 0) {
             return <span></span>;
@@ -86,18 +101,39 @@ class India extends React.Component {
                     <YAxis />
                     <Tooltip />
                     <Legend />
-                    <Bar dataKey='confirmed' stackId='a' fill='#8884d8' />
-                    {data[0].deaths === undefined ? <span></span> : <Bar dataKey='deaths' stackId='a' fill='#cc0000' />}
-                    {data[0].recovered === undefined ? <span></span> : <Bar dataKey='recovered' stackId='a' fill='#82ca9d' />}
+                    <Bar dataKey='confirmed' stackId='a' fill='#8884d8'>
+                        {
+                            data[0].recovered === undefined ?
+                                <LabelList dataKey='deltaconfirmed' content={this.renderDeltaConfirmed} /> : <span></span>
+                        }
+                    </Bar>
+                    {data[0].deaths !== undefined ? <Bar dataKey='deaths' stackId='a' fill='#cc0000' /> : <span></span>}
+                    {
+                        data[0].recovered !== undefined ?
+                            (
+                                <Bar dataKey='recovered' stackId='a' fill='#82ca9d'>
+                                    <LabelList dataKey='deltaconfirmed' content={this.renderDeltaConfirmed} />
+                                </Bar>
+                            ) :
+                            <span></span>
+                    }
                 </BarChart>
             </ResponsiveContainer>
         );
     }
 
     getStats() {
-        let stats = [], currentStats = {};
+        let stats = [];
+        let currentStats = {
+            confirmed: 'N/A',
+            deaths: 'N/A',
+            recovered: 'N/A',
+            deltaconfirmed: 'N/A',
+            deltadeaths: 'N/A',
+            deltarecovered: 'N/A'
+        };
         if (this.state.state === 'All States') {
-            if (Object.keys(this.state.stateBreakout).length === 0 && this.state.stateBreakout.constructor === Object) {
+            if (Object.keys(this.state.stateBreakout).length === 0) {
                 return {stats, currentStats};
             }
 
@@ -108,13 +144,17 @@ class India extends React.Component {
             if (Object.keys(this.state.districtBreakout).length === 0 && this.state.districtBreakout.constructor === Object) {
                 return {stats, currentStats};
             }
+
             currentStats.confirmed = 0;
+            currentStats.deltaconfirmed = 0;
             let districtData = this.state.districtBreakout[this.state.state].districtData;
             stats = Object.keys(districtData).map((district) => {
                 currentStats.confirmed += districtData[district].confirmed;
+                currentStats.deltaconfirmed += districtData[district].delta.confirmed;
                 return ({
                     state: district,
-                    confirmed: districtData[district].confirmed
+                    confirmed: districtData[district].confirmed,
+                    deltaconfirmed: districtData[district].delta.confirmed
                 });
             });
         }
@@ -131,24 +171,41 @@ class India extends React.Component {
                     <Row>
                         <Col>
                             <Dropdown>
-                                <Dropdown.Toggle variant="dark" id="dropdown-basic">
+                                <Dropdown.Toggle variant='dark' id='dropdown-basic'>
                                     {this.state.state}
                                 </Dropdown.Toggle>
 
                                 <Dropdown.Menu>
-                                    <Form.Control type="text" placeholder="Search" onChange={(e) => this.updateSearchBarText(e.target.value)} /> 
+                                    <Form.Control type='text' placeholder='Search' onChange={(e) => this.updateSearchBarText(e.target.value)} /> 
                                     {states}
                                 </Dropdown.Menu>
                             </Dropdown>
                         </Col>
                         <Col>
-                            <h4 style={{color: '#8884d8'}}>Confirmed: {currentStats === undefined || currentStats.confirmed === undefined ? 'N/A' : currentStats.confirmed}</h4>
+                            <h4 style={{color: '#8884d8'}}>
+                                Confirmed: {currentStats.confirmed}
+                                , +{currentStats.deltaconfirmed} today
+                            </h4>
                         </Col>
                         <Col>
-                            <h4 style={{color: '#cc0000'}}>Deaths: {currentStats === undefined || currentStats.deaths === undefined ? 'N/A' : currentStats.deaths}</h4>
+                            <h4 style={{color: '#cc0000'}}>
+                                Deaths: {currentStats.deaths}
+                                {
+                                    currentStats.deltadeaths !== 'N/A' ?
+                                        ', +' + currentStats.deltadeaths + ' today' :
+                                        <span></span>
+                                }
+                            </h4>
                         </Col>
                         <Col>
-                            <h4 style={{color: '#82ca9d'}}>Recovered: {currentStats === undefined || currentStats.recovered === undefined ? 'N/A' : currentStats.recovered}</h4>
+                            <h4 style={{color: '#82ca9d'}}>
+                                Recovered: {currentStats.recovered}
+                                {
+                                    currentStats.deltarecovered !== 'N/A' ?
+                                        ', +' + currentStats.recovered + ' today' :
+                                        <span></span>
+                                }
+                            </h4>
                         </Col>
                     </Row>
                     <Row>
