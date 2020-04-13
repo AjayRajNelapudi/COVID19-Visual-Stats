@@ -3,7 +3,7 @@ import Navigation from './Navigation';
 import {Container, Row, Col, Dropdown, Form} from 'react-bootstrap';
 import {ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, LabelList} from 'recharts';
 
-class IndiaStats extends React.Component {
+class IndiaTrends extends React.Component {
     constructor(props) {
         super(props);
 
@@ -173,7 +173,12 @@ class IndiaStats extends React.Component {
                                 </Dropdown.Toggle>
 
                                 <Dropdown.Menu>
-                                    <Form.Control type='text' placeholder='Search' onChange={(e) => this.updateSearchBarText(e.target.value)} /> 
+                                    <Form.Control
+                                        type='text'
+                                        placeholder='Search'
+                                        value={this.state.searchBarText}
+                                        onChange={(e) => this.updateSearchBarText(e.target.value)}
+                                    /> 
                                     {states}
                                 </Dropdown.Menu>
                             </Dropdown>
@@ -215,4 +220,4 @@ class IndiaStats extends React.Component {
         );
     }   
 }
-export default IndiaStats;
+export default IndiaTrends;

@@ -3,7 +3,7 @@ import {Container, Row, Col, Dropdown, Form} from 'react-bootstrap';
 import {AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer} from 'recharts';
 import Navigation from './Navigation';
 
-class GlobalStats extends React.Component {
+class GlobalTrends extends React.Component {
     constructor(props) {
         super(props);
 
@@ -113,7 +113,12 @@ class GlobalStats extends React.Component {
                                 </Dropdown.Toggle>
 
                                 <Dropdown.Menu>
-                                    <Form.Control type="text" placeholder="Search" onChange={(e) => this.updateSearchBarText(e.target.value)} /> 
+                                    <Form.Control
+                                        type="text"
+                                        placeholder="Search"
+                                        value={this.state.searchBarText}    
+                                        onChange={(e) => this.updateSearchBarText(e.target.value)}
+                                    /> 
                                     {countries}
                                 </Dropdown.Menu>
                             </Dropdown>
@@ -139,4 +144,4 @@ class GlobalStats extends React.Component {
     }
 }
 
-export default GlobalStats;
+export default GlobalTrends;

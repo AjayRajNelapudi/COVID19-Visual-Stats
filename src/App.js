@@ -2,8 +2,9 @@ import React from 'react';
 // import logo from './logo.svg';
 import './App.css';
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
-import GlobalStats from './GlobalStats';
-import IndiaStats from './IndiaStats';
+import GlobalTrends from './GlobalTrends';
+import IndiaTrends from './IndiaTrends';
+import About from './About';
 
 class App extends React.Component {
 	render() {
@@ -11,14 +12,17 @@ class App extends React.Component {
 			<div className="App">
 				<Router>
 					<Switch>
-						<Route path="/globalstats">
-							<GlobalStats />
+						<Route path="/globaltrends">
+							<GlobalTrends />
 						</Route>
-						<Route path="/indiastats">
-							<IndiaStats />
+						<Route path="/indiatrends">
+							<IndiaTrends />
+						</Route>
+						<Route path="/about">
+							<About />
 						</Route>
 						<Route path="/">
-							<GlobalStats />
+							<GlobalTrends />
 						</Route>
 					</Switch>
 				</Router>
