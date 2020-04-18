@@ -89,7 +89,7 @@ class IndiaTrends extends React.Component {
             return <span></span>;
         }
         return (
-            <ResponsiveContainer width={'99%'} height={700}>
+            <ResponsiveContainer height={650}>
                 <BarChart data={data}
                     margin={{top: 50, right: 30, left: 20, bottom: 0}}
                 >

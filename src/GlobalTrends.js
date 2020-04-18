@@ -82,7 +82,7 @@ class GlobalTrends extends React.Component {
 
     renderAreaChart(countryTimeSeries) {
         return (
-            <ResponsiveContainer width={'99%'} height={700}>
+            <ResponsiveContainer height={650}>
                 <AreaChart width={1400} height={700} data={countryTimeSeries}
                     margin={{top: 10, right: 30, left: 30, bottom: 0}}
                 >
